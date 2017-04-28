@@ -24,6 +24,7 @@ def twitter_flow(USERNAME, PASSWORD, ANALYTICS_ACCOUNT, NUM_DAYS, OUTPUT_DIRECTO
         writer = SQLiteWritter()
         conn = sqlite3.connect( outfile )
         writer.createtable(conn)
+        split_data.pop(0)
         for line in split_data:
             writer.writerow(line, conn)
         conn.close()
