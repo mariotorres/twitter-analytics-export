@@ -17,6 +17,8 @@ def twitter_flow(USERNAME, PASSWORD, ANALYTICS_ACCOUNT, NUM_DAYS, OUTPUT_DIRECTO
     start_time, end_time = get_date_range(NUM_DAYS)
     data_string = get_tweet_data(session, ANALYTICS_ACCOUNT, start_time, end_time, user_agent)
 
+    #print(data_string)
+
     split_data = format_data(data_string)
     outfile = get_filename(OUTPUT_DIRECTORY, start_time, end_time)
 
@@ -131,7 +133,32 @@ def get_tweet_data(session, analytics_account, start_time, end_time, user_agent)
 def format_data(data_string):
     """Transform raw data string into list-of-lists format"""
     lines = data_string.split('\"\n\"')
-    split_data = [re.split(r"\"\s*,\s*\"", line) for line in lines]
+
+    #print ( 'type of lines -> ',  type(lines))
+    new_lines =[]
+
+    #remove \n, \r from tweet text
+    for l in lines:
+        new_lines.append( l.replace('\n', ' ').replace('\r',''))
+        #print (l.replace('\n', ' ').replace('\r',''))
+
+
+    split_data= []
+    for line in new_lines:
+        temp = re.split(r"\"\s*,\s*\"", line)
+        temp[2]= temp[2].replace("\"","").replace(","," ")
+        split_data.append(temp)
+        '''
+        split_data.append([
+            temp[0], temp[1], temp[4], temp[5],
+            temp[6], temp[7], temp[8], temp[9], temp[10],
+            temp[11], temp[12], temp[13], temp[14], temp[15],
+            temp[16], temp[17], temp[18], temp[19], temp[20],
+            temp[21]
+                            ])
+                            '''
+
+    # split_data = [re.split(r"\"\s*,\s*\"", line) for line in new_lines]
 
     return split_data
 
