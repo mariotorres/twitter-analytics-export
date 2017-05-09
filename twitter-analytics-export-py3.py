@@ -273,7 +273,7 @@ if __name__ == '__main__':
     parser.add_argument('-o', help="Output directory", default=os.getcwd())
     parser.add_argument('-a', help="Account to return data for (default: -u)", required=False)
     parser.add_argument('-t', help="Output type, options: csv, sqlite (default: -t csv)", required=False)
-    parser.add_argument('-f', help="File name (optional)", required=False)
+    parser.add_argument('-f', help="File name (optional)", default="report", required=False)
     args = parser.parse_args()
 
     USERNAME = args.u    
