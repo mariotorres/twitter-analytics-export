@@ -165,7 +165,7 @@ def format_data(data_string):
 
 def get_filename(output_dir, start_time, end_time):
     """Build descriptive filename for CSV"""
-    f_name = 'twitter_data_' + start_time + '_' + end_time + ( '.db' if args.t == 'sqlite' else '.csv')
+    f_name = ( args.f if args.f is not None else 'twitter_data_' + start_time + '_' + end_time) + ( '.db' if args.t == 'sqlite' else '.csv')
     full_path = output_dir + '/' + f_name
 
     return full_path
@@ -273,6 +273,7 @@ if __name__ == '__main__':
     parser.add_argument('-o', help="Output directory", default=os.getcwd())
     parser.add_argument('-a', help="Account to return data for (default: -u)", required=False)
     parser.add_argument('-t', help="Output type, options: csv, sqlite (default: -t csv)", required=False)
+    parser.add_argument('-f', help="File name (optional)", required=False)
     args = parser.parse_args()
 
     USERNAME = args.u    
