@@ -17,7 +17,8 @@ def twitter_flow(USERNAME, PASSWORD, ANALYTICS_ACCOUNT, NUM_DAYS, OUTPUT_DIRECTO
     start_time, end_time = get_date_range(NUM_DAYS)
     data_string = get_tweet_data(session, ANALYTICS_ACCOUNT, start_time, end_time, user_agent)
 
-    #print(data_string)
+    print("Start time -> ", start_time)
+    print("End time -> ", end_time)
 
     split_data = format_data(data_string)
     outfile = get_filename(OUTPUT_DIRECTORY, start_time, end_time)
